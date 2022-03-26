@@ -11,8 +11,26 @@ app.get("/api", (req, res) => {
     res.json({message: "hello from server!"})
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 mongoose
-  .connect("mongodb://localhost/users", {})
+  .connect("mongodb://localhost/users", {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
   .then(console.log("mongoDB connected"))
   .catch((err) => console.log(err));
 
