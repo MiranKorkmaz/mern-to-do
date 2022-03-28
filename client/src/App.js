@@ -1,27 +1,48 @@
-import React from 'react'
-import {Routes, Route} from "react-router-dom"
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import React, { useState } from 'react'
 
 export default function App() {
 
-  const [data, setData] = React.useState(null);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  // const [data, setData] = React.useState(null);
+
+  // React.useEffect(() => {
+  //   fetch("/api")
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data.message));
+  // }, []);
+
+  async function userRegister(event) {
+    event.preventDefault()
+    const response = await fetch("http://localhost:3001/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({username, password})
+    })
+
+    const data = await response.json()
+    console.log(data)
+  }
 
   return (
     <div>
-      <p>{!data ? "Loading..." : data}</p>
-      <Routes>
-        <Route path="/home" element={HomePage} />
-        <Route path="/login" element={LoginPage} />
-        <Route path="/register" element={RegisterPage} />
-      </Routes>
+      <h1>Register</h1>
+      <form onSubmit={userRegister}>
+        <input 
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text" 
+          placeholder="Username"
+        />
+        <input 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password" 
+          placeholder="Password"
+        />
+        <input type="submit" value="Register"/>
+      </form>
     </div>
   )
 }
