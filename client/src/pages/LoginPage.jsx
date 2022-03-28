@@ -1,8 +1,12 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
+
 
   async function userLogin(event) {
     event.preventDefault()
@@ -16,6 +20,11 @@ export default function LoginPage() {
       })
     })
     const data = await response.json()
+    if (data.user) {
+      navigate("/home")
+    } else {
+      alert("Wrong username or password")
+    }
   }
 
 

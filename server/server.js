@@ -2,6 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
 const User = require("./models/User")
+const jwt = require("jsonwebtoken")
 
 const app = express()
 const port = 3001
@@ -31,8 +32,12 @@ app.post("/api/register", async (req,res) => {
 
 app.post("/api/login", async (req, res) => {
     const user = await User.findOne({username: req.body.username, password: req.body.password})
+
     if (user) {
-      return res.json({status: "ok", user: true})
+      const token = jwt.sign({
+        username: user.username
+      }, "secret123456789")
+      return res.json({status: "ok", user: token})
     } else {
       return res.json({status: "error", user: false})
     }
