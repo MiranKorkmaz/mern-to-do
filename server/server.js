@@ -4,33 +4,63 @@ const mongoose = require("mongoose")
 const User = require("./models/User")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
+const cookieParser = require("cookie-parser")
 
 const app = express()
 const port = 3001
-
 
 // middlewares 
 app.use(cors())
 // tells express to pass anything from body to json
 app.use(express.json())
+app.use(cookieParser())
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
+
+// declaring JWT secret
+const JWT = "secret123"
+
+// middlewear for authorization
+app.use((req, _res, next) => {
+  const authHeader = req.header("Authorization")
+  if (authHeader) {
+    const token = authHeader.split(" ")[1]
+    req.user = jwt.verify(token, JWT)
+  }
+  next()
+})
+
+
+const requireLogin = (req, res, next) => {
+  if (req.user) {
+      next();
+  } else {
+      res.sendStatus(401);
+  }
+}
+
 
 // routes
 app.post("/api/register", async (req,res) => {
   try {
     const newPassword = await bcrypt.hash(req.body.password, 10)
-    const user = await User.create({
-      username: req.body.username,
+    const {username, password} = req.body
+    const user = new User({
+      username,
       password: newPassword
     })
+    await user.save()
     res.json({status: "ok"})
   } catch (err) {
     res.json({status: "error"})
   }
 })
+
+app.get("/users", requireLogin, (req, res) => {
+  const user = req.user
+  User.findOne({ user : user })
+  res.json({ user })
+})
+
 
 app.post("/api/login", async (req, res) => {
     const user = await User.findOne({username: req.body.username})
@@ -39,13 +69,16 @@ app.post("/api/login", async (req, res) => {
     }
     const isPassword = await bcrypt.compare(req.body.password, user.password)
     if (isPassword) {
-      const token = jwt.sign({
-        username: user.username
-      }, "secret123456789")
-      return res.json({status: "ok", user: token})
+      const userId = user._id.toString()
+      const token = jwt.sign({userId, username: user.username}, JWT)
+      res.json({user: token, status: "ok"})
     } else {
       return res.json({status: "error", user: false})
     }
+})
+
+app.post("/api/logout", (req, res) => {
+  res.cookie("token", "").send()
 })
 
 

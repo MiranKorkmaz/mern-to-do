@@ -11,20 +11,31 @@ export default function LoginPage() {
   async function userLogin(event) {
     event.preventDefault()
 
-    const response = await fetch("http://localhost:3001/api/login", {
+    fetch("http://localhost:3001/api/login", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
         username,
         password
       })
+    }).then(res => res.json())
+    .then(data => {
+      const token = data.token
+      localStorage.setItem("Backend-2", token)
+      if(data.user) {
+        navigate("/home")
+      } else {
+        window.alert("Wrong username or password")
+      }
     })
-    const data = await response.json()
-    if (data.user) {
-      navigate("/home")
-    } else {
-      alert("Wrong username or password")
-    }
+  //   const data = await response.json()
+  //   const token = data.token 
+  //   localStorage.setItem("Backend-2", token)
+  //   if (data.user) {
+  //     navigate("/home")
+  //   } else {
+  //     alert("Wrong username or password")
+  //   }
   }
 
 

@@ -10,7 +10,7 @@ const todoSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.Boolean,
         required: true
     },
-    userId: {
+    user: {
         type: mongoose.SchemaTypes.ObjectId
     }
 })
