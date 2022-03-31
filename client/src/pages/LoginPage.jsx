@@ -28,14 +28,6 @@ export default function LoginPage() {
         window.alert("Wrong username or password")
       }
     })
-  //   const data = await response.json()
-  //   const token = data.token 
-  //   localStorage.setItem("Backend-2", token)
-  //   if (data.user) {
-  //     navigate("/home")
-  //   } else {
-  //     alert("Wrong username or password")
-  //   }
   }
 
 
