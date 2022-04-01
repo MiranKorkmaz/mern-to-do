@@ -5,6 +5,8 @@ const User = require("./models/User")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser")
+const bodyParser = require("body-parser")
+const todoRoutes = require("../server/routes/todos")
 
 const app = express()
 const port = 3001
@@ -14,6 +16,8 @@ app.use(cors())
 // tells express to pass anything from body to json
 app.use(express.json())
 app.use(cookieParser())
+app.use(bodyParser.json({ limit: "30mb", extended: true }))
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
 
 
 // declaring JWT secret
@@ -40,6 +44,9 @@ const requireLogin = (req, res, next) => {
 
 
 // routes
+
+app.use("/todos", todoRoutes)
+
 app.post("/api/register", async (req,res) => {
   try {
     const newPassword = await bcrypt.hash(req.body.password, 10)
