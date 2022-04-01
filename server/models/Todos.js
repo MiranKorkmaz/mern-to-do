@@ -12,6 +12,11 @@ const todoSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.SchemaTypes.ObjectId
+    },
+    tags: [String],
+    createdAt: {
+        type: Date,
+        default: new Date()
     }
 })
 
