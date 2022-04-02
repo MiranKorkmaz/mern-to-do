@@ -6,18 +6,18 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    done: {
-        type: mongoose.SchemaTypes.Boolean,
-        required: true
-    },
+    // done: {
+    //     type: mongoose.SchemaTypes.Boolean,
+    //     required: true
+    // },
     user: {
         type: mongoose.SchemaTypes.ObjectId
     },
     tags: [String],
-    createdAt: {
-        type: Date,
-        default: new Date()
-    }
+    // createdAt: {
+    //     type: Date,
+    //     default: new Date()
+    // }
 })
 
 

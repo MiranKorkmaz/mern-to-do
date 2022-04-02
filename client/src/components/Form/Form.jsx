@@ -1,44 +1,43 @@
 import React, {useState} from 'react'
+import { useDispatch } from "react-redux"
+import { createTodo } from "../../actions/todos"
 
 const Form = () => {
     const [todoData, setTodoData] = useState({
         user: "", entry: "", tags: "" 
     })
+    const dispatch = useDispatch()
 
-    const handleOnSubmit = () => {
+    const handleOnSubmit = (e) => {
+        e.preventDefault()
 
+        dispatch(createTodo(todoData))
     }
 
-    const clear = () => {
+    // const clear = () => {
         
-    }
+    // }
 
 
     return (
         <form onSubmit={handleOnSubmit}>
-            <textarea 
-                name="user" 
-                rows="10"
-                cols="10"    
+            <input 
+                name="user"    
                 value={todoData.user}
                 onChange={(e) => setTodoData({ ...todoData, user: e.target.value })}
             />
-            <textarea 
+            <input 
                 name="entry" 
-                rows="10"
-                cols="10"    
                 value={todoData.entry}
                 onChange={(e) => setTodoData({ ...todoData, entry: e.target.value })}
             />
-            <textarea 
-                name="tags" 
-                rows="10"
-                cols="10"    
+            <input 
+                name="tags"   
                 value={todoData.tags}
                 onChange={(e) => setTodoData({ ...todoData, tags: e.target.value })}
             />
             <button type="submit">Submit</button>
-            <button type={clear}>Clear</button>
+            {/* <button type={clear}>Clear</button> */}
         </form>
     )
 }

@@ -1,7 +1,6 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import bodyParser from "body-parser"
 import todoRoute from "./routes/todo.js"
 
 const app = express()
@@ -12,8 +11,7 @@ app.use(cors())
 // tells express to pass anything from body to json
 app.use(express.json())
 // app.use(cookieParser())
-app.use(bodyParser.json({ limit: "30mb", extended: true }))
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
+
 
 
 // declaring JWT secret
