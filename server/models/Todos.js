@@ -11,7 +11,7 @@ const todoSchema = new mongoose.Schema({
     //     required: true
     // },
     user: {
-        type: mongoose.SchemaTypes.ObjectId
+        type: String
     },
     tags: [String],
     // createdAt: {
