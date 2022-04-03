@@ -6,11 +6,16 @@ const Todos = () => {
     const todos = useSelector((state) => state.todos)
     console.log(todos)
     return (
-        <>
-        <h1>Todos</h1>
-        <Todo />
-        <Todo/>
-        </>
+        !todos.length ? "No todos.." : (
+            <>
+                {todos.map((todo) => (
+                    <p key={todo._id}>
+                        <Todo todo={todo}/>
+                    </p>
+                ))}
+            
+            </>
+        )
     )
 }
 

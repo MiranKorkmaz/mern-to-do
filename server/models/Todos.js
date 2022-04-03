@@ -14,10 +14,10 @@ const todoSchema = new mongoose.Schema({
         type: String
     },
     tags: [String],
-    // createdAt: {
-    //     type: Date,
-    //     default: new Date()
-    // }
+    createdAt: {
+        type: Date,
+        default: new Date()
+    }
 })
 
 

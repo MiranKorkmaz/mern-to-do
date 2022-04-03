@@ -13,7 +13,6 @@ export const getTodos = () => async (dispatch) => {
 
 
 export const createTodo = (todo) => async (dispatch) => {
-    console.log(todo)
     try {
         const { data } = await api.createTodo(todo)
         dispatch({ type: "CREATE", payload: data})

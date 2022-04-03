@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Todo = () => {
+const Todo = ({todo}) => {
     return (
-        <h1>Todo</h1>
+        <>
+            <p>{todo.user}</p>
+            <p>{todo.entry}</p>
+            <p>{todo.tags.map((tag) => `#${tag} `)}</p>
+            <button>Delete</button>
+        </>
     )
 }
 
