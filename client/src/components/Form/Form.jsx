@@ -36,12 +36,12 @@ const Form = ({currentId, setCurrentId}) => {
             <input 
                 name="entry" 
                 value={todoData.entry}
-                onChange={(e) => setTodoData({ ...todoData, entry: e.target.value })}
+                onChange={(e) => setTodoData({ ...todoData, entry: e.target.value})}
             />
             <input 
                 name="tags"   
                 value={todoData.tags}
-                onChange={(e) => setTodoData({ ...todoData, tags: e.target.value })}
+                onChange={(e) => setTodoData({ ...todoData, tags: e.target.value.split(",") })}
             />
             <button type="submit">Submit</button>
         </form>

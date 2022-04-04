@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import {useDispatch} from "react-redux"
-import Todos from "./components/Todos/Todos"
-import Form from './components/Form/Form'
-import {getTodos} from "./actions/todos"
+import React from 'react'
+import Navbar from './components/Navbar/Navbar'
+import { Routes, Route} from "react-router-dom"
+import Home from './components/Home/Home'
+import Auth from './components/Auth/Auth'
 
 export default function App() {
-  const [currentId, setCurrentId] = useState(null)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getTodos())
-  }, [currentId, dispatch])
 
   return (
-    <div>
-      <Form currentId={currentId} setCurrentId={setCurrentId}/>
-      <Todos setCurrentId={setCurrentId}/>
-    </div>
+    <>
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth" element={<Auth />} />
+    </Routes>
+    </>
   )
 }
