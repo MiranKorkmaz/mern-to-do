@@ -25,10 +25,6 @@ const Form = ({currentId, setCurrentId}) => {
         }
     }
 
-    // const clear = () => {
-        
-    // }
-
 
     return (
         <form onSubmit={handleOnSubmit}>
@@ -48,7 +44,6 @@ const Form = ({currentId, setCurrentId}) => {
                 onChange={(e) => setTodoData({ ...todoData, tags: e.target.value })}
             />
             <button type="submit">Submit</button>
-            {/* <button type={clear}>Clear</button> */}
         </form>
     )
 }

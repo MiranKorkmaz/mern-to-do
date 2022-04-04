@@ -25,6 +25,15 @@ export const updateTodo = async (req, res) => {
     const { id: _id } = req.params
     const todo = req.body
     if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No to-do with that ID")
-    const updatedTodo = await Todos.findByIdAndUpdate(_id, todo, { new: true })
+    const updatedTodo = await Todos.findByIdAndUpdate(_id, { ...todo, _id }, { new: true })
     res.json(updatedTodo)
+}
+
+export const deleteTodo = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No to-do with that ID")
+
+    await Todos.findByIdAndRemove(id)
+
+    res.json({message: "Post deleted successfully"})
 }
