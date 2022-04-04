@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
 import todoRoute from "./routes/todo.js"
+import userRoute from "./routes/user.js"
 
 const app = express()
 const port = 3001
@@ -14,6 +15,7 @@ app.use(express.json())
 
 
 app.use("/todos", todoRoute)
+app.use("/user", userRoute)
 
 
 // connect app to mongoose

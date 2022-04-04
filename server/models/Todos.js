@@ -6,10 +6,6 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // done: {
-    //     type: mongoose.SchemaTypes.Boolean,
-    //     required: true
-    // },
     user: {
         type: String
     },
