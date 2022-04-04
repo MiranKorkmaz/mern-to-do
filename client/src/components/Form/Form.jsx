@@ -1,17 +1,28 @@
-import React, {useState} from 'react'
-import { useDispatch } from "react-redux"
-import { createTodo } from "../../actions/todos"
+import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { createTodo, updateTodo } from "../../actions/todos"
 
-const Form = () => {
+
+// get current id 
+
+const Form = ({currentId, setCurrentId}) => {
     const [todoData, setTodoData] = useState({
         user: "", entry: "", tags: "" 
     })
+    const todo = useSelector((state) => currentId ? state.todos.find((t) => t._id === currentId) : null)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (todo) setTodoData(todo)
+    }, [todo])
 
     const handleOnSubmit = (e) => {
         e.preventDefault()
-
-        dispatch(createTodo(todoData))
+        if(currentId) {
+            dispatch(updateTodo(currentId, todoData))
+        } else {
+            dispatch(createTodo(todoData))
+        }
     }
 
     // const clear = () => {

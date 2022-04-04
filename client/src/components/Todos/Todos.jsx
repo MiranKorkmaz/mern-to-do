@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Todo from './Todo/Todo'
 
-const Todos = () => {
+const Todos = ({setCurrentId}) => {
     const todos = useSelector((state) => state.todos)
     console.log(todos)
     return (
@@ -10,7 +10,7 @@ const Todos = () => {
             <>
                 {todos.map((todo) => (
                     <p key={todo._id}>
-                        <Todo todo={todo}/>
+                        <Todo todo={todo} setCurrentId={setCurrentId}/>
                     </p>
                 ))}
             

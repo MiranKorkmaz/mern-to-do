@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import Todos from "../models/Todos.js"
 
 export const getTodo = async (req, res) => {
@@ -18,4 +19,12 @@ export const createTodo = async (req, res) => {
     } catch (error) {
         res.status(409).json({message: error.message})
     }
+}
+
+export const updateTodo = async (req, res) => {
+    const { id: _id } = req.params
+    const todo = req.body
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No to-do with that ID")
+    const updatedTodo = await Todos.findByIdAndUpdate(_id, todo, { new: true })
+    res.json(updatedTodo)
 }
