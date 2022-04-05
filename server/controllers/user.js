@@ -4,7 +4,7 @@ import User from "../models/User.js"
 
 export const signin = async (req, res) => {
     const { user, password } = req.body
-    console.log(user)
+    console.log(req.body)
     try {
         const existingUser = await User.findOne({ user })
         

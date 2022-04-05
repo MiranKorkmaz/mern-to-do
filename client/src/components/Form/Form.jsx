@@ -9,7 +9,7 @@ const Form = ({currentId, setCurrentId}) => {
     const [todoData, setTodoData] = useState({
         entry: "", tags: "" 
     })
-    const todo = useSelector((state) => currentId ? state.todos.find((t) => t._id === currentId) : null)
+    const todo = useSelector((state) => currentId ? state.todos.find((entry) => entry._id === currentId) : null)
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem("profile"))
 

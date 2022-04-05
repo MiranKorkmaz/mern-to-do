@@ -21,6 +21,7 @@ export default function Auth() {
       dispatch(signin(formData))
       navigate("/")
     }
+    console.log(formData)
   }
 
   const handleOnChange = (e) => {

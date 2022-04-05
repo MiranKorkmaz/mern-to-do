@@ -2,12 +2,8 @@ import mongoose from 'mongoose';
 
 const todoSchema = new mongoose.Schema({
     
-    entry: {
-        type: String,
-    },
-    user: {
-        type: String
-      },
+    entry: String,
+    user:  String,
     tags: [String],
     createdAt: {
         type: Date,

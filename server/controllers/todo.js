@@ -12,10 +12,7 @@ export const getTodo = async (req, res) => {
 
 export const createTodo = async (req, res) => {
     const todo = req.body
-    console.log(req.body)
-    console.log(todo)
     const newTodo = new Todos({ ...todo, user: req.userId, createdAt: new Date().toISOString() })
-    console.log(newTodo)
     try {
         await newTodo.save()
         res.status(201).json(newTodo)
