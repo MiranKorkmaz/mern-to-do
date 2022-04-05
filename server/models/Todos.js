@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const todoSchema = new mongoose.Schema({
-    
     entry: String,
     user:  String,
     tags: [String],
