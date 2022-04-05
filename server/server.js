@@ -3,6 +3,7 @@ import cors from "cors"
 import mongoose from "mongoose"
 import todoRoute from "./routes/todo.js"
 import userRoute from "./routes/user.js"
+import bodyParser from "body-parser"
 
 const app = express()
 const port = 3001
@@ -11,6 +12,7 @@ const port = 3001
 app.use(cors())
 // tells express to pass anything from body to json
 app.use(express.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 
 

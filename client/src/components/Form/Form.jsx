@@ -7,10 +7,11 @@ import { createTodo, updateTodo } from "../../actions/todos"
 
 const Form = ({currentId, setCurrentId}) => {
     const [todoData, setTodoData] = useState({
-        user: "", entry: "", tags: "" 
+        entry: "", tags: "" 
     })
     const todo = useSelector((state) => currentId ? state.todos.find((t) => t._id === currentId) : null)
     const dispatch = useDispatch()
+    const user = JSON.parse(localStorage.getItem("profile"))
 
     useEffect(() => {
         if (todo) setTodoData(todo)
@@ -18,21 +19,22 @@ const Form = ({currentId, setCurrentId}) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        if(currentId) {
-            dispatch(updateTodo(currentId, todoData))
+        if(currentId === 0) {
+            dispatch(updateTodo({ ...todoData, user: user?.result?.user }))
         } else {
-            dispatch(createTodo(todoData))
+            dispatch(createTodo(currentId, {...todoData, user: user?.result?.user}))
         }
     }
-
+    if(!user?.result?.user) {
+        return (
+            <div>
+                <p>Please sign in to create a todo</p>
+            </div>
+        )
+    }
 
     return (
         <form onSubmit={handleOnSubmit}>
-            <input 
-                name="user"    
-                value={todoData.user}
-                onChange={(e) => setTodoData({ ...todoData, user: e.target.value })}
-            />
             <input 
                 name="entry" 
                 value={todoData.entry}

@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux"
 import { signin, signup } from "../../actions/auth"
 import {useNavigate} from "react-router-dom"
 
-const initialState = { username: "", password: "" }
+const initialState = { user: "", password: "" }
 
 export default function Auth() {
   const [isSignup, setIsSignup] = useState(false)
@@ -37,9 +37,9 @@ export default function Auth() {
       <form onSubmit={handleOnSubmit}>
         <input
           type="text"
-          name="username"
-          label="username"
-          placeholder="Username"
+          name="user"
+          label="user"
+          placeholder="user"
           onChange={handleOnChange}
           required
         />

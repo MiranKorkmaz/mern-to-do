@@ -11,13 +11,17 @@ export const getTodo = async (req, res) => {
 }
 
 export const createTodo = async (req, res) => {
-    const singleTodo = req.body
-    const newTodo = new Todos(singleTodo)
+    const todo = req.body
+    console.log(req.body)
+    console.log(todo)
+    const newTodo = new Todos({ ...todo, user: req.userId, createdAt: new Date().toISOString() })
+    console.log(newTodo)
     try {
         await newTodo.save()
         res.status(201).json(newTodo)
     } catch (error) {
-        res.status(409).json({message: error.message})
+        res.status(409).json({message: error})
+        console.log(error)
     }
 }
 
