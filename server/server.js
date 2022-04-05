@@ -10,9 +10,9 @@ const port = 3001
 
 // middlewares 
 app.use(cors())
+app.use(bodyParser.urlencoded({extended: true}))
 // tells express to pass anything from body to json
 app.use(express.json())
-app.use(bodyParser.urlencoded({extended: true}))
 
 
 

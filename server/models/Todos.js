@@ -4,11 +4,10 @@ const todoSchema = new mongoose.Schema({
     
     entry: {
         type: String,
-        required: true
     },
     user: {
         type: String
-    },
+      },
     tags: [String],
     createdAt: {
         type: Date,
